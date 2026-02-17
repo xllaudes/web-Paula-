@@ -1,0 +1,86 @@
+MANUAL DE GESTION: PAULA LLAUDES - STUDIO
+
+Bienvenida a tu nueva plataforma arquitectonica. Este manual te guiara paso a paso para que puedas gestionar tu portfolio, blog y contenido de forma autonoma.
+
+--------------------------------------------------------------------------------
+
+1. EL CORAZON DE LA WEB: SUPABASE
+Para gestionar los datos dinamicos (proyectos y blog), utilizamos Supabase. Es tu panel de control (CMS) donde podras añadir, editar o borrar contenido.
+
+Acceso:
+1. Entra en Supabase.com e inicia sesion con tu cuenta.
+2. Selecciona tu proyecto: paula-arquitectura.
+3. En la barra lateral izquierda, haz clic en el icono de tabla (Table Editor).
+
+--------------------------------------------------------------------------------
+
+2. GESTION DEL PORTFOLIO (PROYECTOS)
+Aqui es donde aparecen los trabajos que se ven en la seccion "Projects".
+
+Como añadir un nuevo proyecto:
+1. En el Table Editor, selecciona la tabla "proyectos".
+2. Haz clic en el boton "Insert row" (arriba a la derecha).
+3. Rellena los campos:
+   - titulo: Nombre del proyecto (ej: Residencia AETHER).
+   - descripcion: Breve explicacion del concepto arquitectonico.
+   - imagen_url: Aqui debes pegar el enlace de la imagen. 
+     (Tip: Puedes subir imagenes a la seccion "Storage" de Supabase y copiar el "Public URL").
+   - categoria: Debe ser exactamente una de estas tres: Edificacion, Urbanismo o Maquetas.
+   - año: El año de realizacion (ej: 2024).
+4. Haz clic en "Save" y el proyecto aparecera instantaneamente en la web.
+
+Como editar o borrar:
+- Haz doble clic sobre cualquier celda para cambiar el texto.
+- Para borrar, selecciona la fila (check a la izquierda) y dale a "Delete row".
+
+--------------------------------------------------------------------------------
+
+3. GESTION DEL JOURNAL (BLOG)
+Tus articulos y reflexiones teoricas se gestionan en la tabla "posts".
+
+Como publicar un nuevo articulo:
+1. Selecciona la tabla "posts" en el Table Editor.
+2. Haz clic en "Insert row".
+3. Rellena los campos:
+   - titulo: El titular del articulo.
+   - contenido: El texto completo. Puedes usar saltos de línea para parrafos.
+   - fecha: La fecha de publicacion (formato AAAA-MM-DD).
+   - categoria: (Opcional) Ej: Teoria, Urbanismo, Viajes.
+4. Haz clic en "Save".
+
+--------------------------------------------------------------------------------
+
+4. GESTION DE IMAGENES (STORAGE)
+Para que las imagenes se vean en la web, deben estar alojadas en internet. Supabase incluye un espacio para esto:
+
+1. Ve a la seccion "Storage" (icono de cubo en la barra lateral).
+2. Entra en la carpeta especificada (ej: portfolio-images).
+3. Sube tus archivos (JPG/PNG).
+4. Haz clic en el archivo subido y selecciona "Get Public URL". Ese es el enlace que debes pegar en el campo "imagen_url" de las tablas.
+
+--------------------------------------------------------------------------------
+
+5. INFORMACION ESTATICA (SOBRE MI / CONTACTO)
+Algunas secciones de la web son estaticas por diseño (el texto no cambia frecuentemente). 
+
+- Editar "About" o "Contact": Actualmente estos textos estan integrados en el codigo para mantener la precision estetica del estilo AETHER.
+- Para cambiarlos: Puedes pedirselo directamente al desarrollador o editar los archivos src/pages/About.tsx y src/pages/Contact.tsx.
+
+--------------------------------------------------------------------------------
+
+6. FORMULARIO DE CONTACTO
+Cuando alguien te escriba a traves de la web:
+1. Los mensajes se envian automaticamente a traves de un servicio llamado n8n.
+2. Llegaran directamente a tu correo electronico configurado.
+3. Nota: Comprobar que la variable VITE_N8N_WEBHOOK_URL sea correcta en el archivo .env.
+
+--------------------------------------------------------------------------------
+
+7. CONSEJOS DE ESTILO AETHER
+Para mantener la estetica premium de la web:
+- Imagenes: Usa fotos de alta calidad, con tonos desaturados o composiciones limpias.
+- Textos: Manten descripciones breves y directas. La web respira a traves del espacio en blanco.
+
+--------------------------------------------------------------------------------
+
+Si tienes cualquier duda tecnica o quieres añadir una funcionalidad nueva, solo tienes que pedirlo.

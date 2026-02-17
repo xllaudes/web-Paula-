@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Playfair Display", serif;
+
+  --color-aether-black: #0F0F0F;
+  --color-aether-gray-900: #1A1A1A;
+  --color-aether-gray-800: #2A2A2A;
+  --color-aether-gray-400: #888888;
+  --color-aether-white: #E5E5E5;
+  --color-aether-pure: #FFFFFF;
+}
+
+@layer base {
+  body {
+    @apply bg-aether-black text-aether-white font-sans antialiased;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .aether-border {
+    @apply border border-aether-gray-800;
+  }
+
+  .aether-link {
+    @apply transition-all duration-300 hover:text-aether-pure hover:tracking-widest;
+  }
+
+  .technical-line {
+    @apply h-[1px] bg-aether-gray-800 w-full;
+  }
+
+  .animate-draw {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw 4s ease-out forwards;
+  }
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
