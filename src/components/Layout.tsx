@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
+import MobileMenu from './MobileMenu';
 
 interface LayoutProps {
     children: ReactNode;
@@ -19,8 +20,11 @@ export default function Layout({ children }: LayoutProps) {
 
     return (
         <div className="flex min-h-screen bg-aether-black text-aether-white">
-            {/* Fixed Sidebar */}
-            <aside className="fixed left-0 top-0 h-screen w-64 border-r border-aether-gray-800 p-8 flex flex-col justify-between">
+            {/* Mobile Menu */}
+            <MobileMenu navItems={navItems} />
+
+            {/* Fixed Sidebar - Hidden on mobile, visible on lg+ */}
+            <aside className="hidden lg:flex fixed left-0 top-0 h-screen w-64 border-r border-aether-gray-800 p-8 flex-col justify-between">
                 <div>
                     <Link to="/" className="block group">
                         <div className="w-10 h-10 mb-6 text-white group-hover:text-aether-pure transition-colors">
@@ -61,9 +65,9 @@ export default function Layout({ children }: LayoutProps) {
                 </div>
             </aside>
 
-            {/* Main Content */}
-            <main className="ml-64 flex-1">
-                <div className="min-h-screen p-16">
+            {/* Main Content - No left margin on mobile, margin on lg+ */}
+            <main className="w-full lg:ml-64 flex-1">
+                <div className="min-h-screen p-6 md:p-12 lg:p-16">
                     {children}
                 </div>
             </main>

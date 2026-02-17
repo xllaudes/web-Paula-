@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
 
 export default function Home() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -57,12 +58,43 @@ export default function Home() {
         <div className="relative h-screen bg-aether-black text-aether-white overflow-hidden selection:bg-aether-pure selection:text-aether-black">
             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-40" />
 
+            {/* Mobile Hamburger Menu */}
+            <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="fixed top-6 right-6 z-50 lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 bg-aether-black/80 border border-aether-gray-800 rounded-sm"
+                aria-label="Toggle menu"
+            >
+                <span className={`w-5 h-[1px] bg-aether-white transition-all ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                <span className={`w-5 h-[1px] bg-aether-white transition-all ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`} />
+                <span className={`w-5 h-[1px] bg-aether-white transition-all ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+            </button>
+
+            {/* Mobile Menu Overlay */}
+            <div
+                className={`fixed inset-0 bg-aether-black/95 backdrop-blur-md z-40 lg:hidden transition-all duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                    }`}
+            >
+                <nav className="flex flex-col items-center justify-center h-full gap-8">
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.path}
+                            to={link.path}
+                            onClick={() => setIsMenuOpen(false)}
+                            className="group flex items-center gap-3 font-sans text-sm tracking-[0.3em] text-aether-gray-400 hover:text-aether-white transition-all"
+                        >
+                            <span className="text-xs opacity-30 group-hover:opacity-100">{link.num}</span>
+                            {link.label}
+                        </Link>
+                    ))}
+                </nav>
+            </div>
+
             {/* Navigation Overlay */}
-            <nav className="absolute top-12 left-12 z-20">
+            <nav className="absolute top-6 left-6 md:top-12 md:left-12 z-20">
                 <div className="flex flex-col gap-1">
-                    <h2 className="text-3xl font-serif tracking-tighter leading-none">PAULA</h2>
-                    <h2 className="text-3xl font-serif tracking-tighter leading-none">LLAUDES</h2>
-                    <p className="text-[9px] tracking-[0.4em] text-aether-gray-400 mt-4 uppercase font-medium">Architecture / Design</p>
+                    <h2 className="text-xl md:text-3xl font-serif tracking-tighter leading-none">PAULA</h2>
+                    <h2 className="text-xl md:text-3xl font-serif tracking-tighter leading-none">LLAUDES</h2>
+                    <p className="text-[8px] md:text-[9px] tracking-[0.4em] text-aether-gray-400 mt-2 md:mt-4 uppercase font-medium">Architecture / Design</p>
                 </div>
             </nav>
 
@@ -91,8 +123,8 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Side Navigation */}
-            <div className="absolute right-12 top-0 h-full flex flex-col justify-center gap-12 z-20">
+            {/* Side Navigation - Desktop Only */}
+            <div className="hidden lg:flex absolute right-12 top-0 h-full flex-col justify-center gap-12 z-20">
                 {navLinks.map((link) => (
                     <Link
                         key={link.path}
@@ -110,12 +142,12 @@ export default function Home() {
             </div>
 
             {/* Bottom Technical Bar */}
-            <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end z-20 pointer-events-none">
-                <div className="text-[8px] tracking-[0.3em] text-aether-gray-400 font-mono space-y-1 uppercase">
+            <div className="absolute bottom-6 left-6 right-6 md:bottom-12 md:left-12 md:right-12 flex justify-between items-end z-20 pointer-events-none">
+                <div className="text-[7px] md:text-[8px] tracking-[0.2em] md:tracking-[0.3em] text-aether-gray-400 font-mono space-y-1 uppercase">
                     <p>Lat: 39.4699° N</p>
                     <p>Long: 0.3763° W</p>
                 </div>
-                <div className="text-[8px] tracking-[0.5em] text-aether-gray-400 font-sans uppercase">
+                <div className="text-[7px] md:text-[8px] tracking-[0.3em] md:tracking-[0.5em] text-aether-gray-400 font-sans uppercase">
                     EST. 2026 / VALENCIA
                 </div>
             </div>
